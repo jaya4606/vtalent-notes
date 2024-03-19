@@ -99,7 +99,7 @@ resource "aws_route_table_association" "b" {
   route_table_id = aws_route_table.route2.id
 }
 ```
-## terraform modules
+## terraform modules usage
 -----------------------------------------
 * [Refere Here](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest) for vpc modules in terraform registry.
 
