@@ -29,12 +29,17 @@
 --------------------------------------
 ### private-key
 -----------------------------------
-* first create a ubuntu/centos machine with __my_key__(with importkey from my laptop)
+1. first create a ubuntu/centos machine with __my_key__(with importkey from my laptop)
 * goto jenkins UI managenodes->create node->
    * in the agent via ssh
    * give username and rivate key
      * inthis give default user of that ubuntu machine and copy the private key from our laptop.(/home/user/.ssh/id_rsa)
      * becuase you login with __my_key__
+2. first check the jenkins homedirectoy of jenkins user by
+```
+sudo su -l jenkins
+```
+* generate the ssh keys, and add private key to the jenkins manage password section.`check the username properly`. 
 ### password
 * first login into ubuntu/centos machine
 * create a user jenkins with password
