@@ -57,7 +57,7 @@ helm upgrade mynginx nginx
 helm rollback <relase-name>
 helm rollback mynginx
 ```
-
+* for the Helm Cheatsheet [Refer Here](https://helm.sh/docs/intro/cheatsheet/)
 
 
 
