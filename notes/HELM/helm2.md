@@ -23,9 +23,12 @@ kubectl config use-context <cluster-name>
 
 ### conditions in helm
 ----------------------------------
-* __if__
+* __if__.
+------------------------
 ![preview](./images/helm16.png)
-* __with__
+
+* __with__.
+--------------------
 ![preview](./images/helm17.png)
 ![preview](./images/helm18.png)
 ![preview](./images/helm19.png)
