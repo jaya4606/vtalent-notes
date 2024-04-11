@@ -32,3 +32,4 @@
 30. Backing Up Jenkins Server And Restoring into another New Jenkins Server [Refer Here](https://medium.com/@swarnamalya044/backing-up-jenkins-server-and-restoring-into-another-new-jenkins-server-61980d74b34d)
 31. Why Should You Create a Backup of Jenkins Jobs and Store Them? [Refer Here](https://medium.com/@prabahar87/why-should-you-create-a-backup-of-jenkins-jobs-and-store-them-63739f10bbc2)
 32. Kubernetes: DNS[Refer Here](https://yuminlee2.medium.com/kubernetes-dns-bdca7b7cb868#:~:text=In%20Kubernetes%2C%20DNS%20names%20are%20assigned%20to%20Pods%20and%20Services,format%20.)
+33. Setting Up Amazon Linux EC2 Instance for Web Server Installation [Refer Here](https://medium.com/@preciousdipe/setting-up-amazon-linux-ec2-instance-for-web-server-installation-e1ef56aa4a0a)
