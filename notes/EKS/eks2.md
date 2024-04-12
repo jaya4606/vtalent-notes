@@ -3,6 +3,7 @@
 
 # services
 -----------------------------------------------------
+![preview](./images/eks22.png)
 * [Refer Here](https://kubernetes.io/docs/concepts/services-networking/service/) for official docs of service.
 * Service used in k8s for communication in the cluster.
 ### 1. Internal communication
