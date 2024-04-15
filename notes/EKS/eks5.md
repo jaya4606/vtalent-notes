@@ -8,6 +8,11 @@
 ![preview](./images/eks74.png)
 * after changing template in `main.tf`,lets execute `terraform plan`.
 ![preview](./images/eks75.png)
+
+
+![preview](./images/eks101.png)
+![preview](./images/eks102.png)
+
 1. add the available `addons` in eks cluster console.
 ![preview](./images/eks76.png)
 ![preview](./images/eks77.png)
