@@ -36,3 +36,4 @@
 34. How-to: Create a Custom Terraform Module [Refer Here](https://blog.wahab2.com/how-to-create-a-custom-terraform-module-f71ba9569656).
 35. How to Install Prometheus and Grafana on Ubuntu 22.04 LTS — Configure Grafana Dashboard [Refer Here](https://ibrahims.medium.com/how-to-install-prometheus-and-grafana-on-ubuntu-22-04-lts-configure-grafana-dashboard-5d11e3cb3cfd).
 36. AutoScaling in Kubernetes with Horizontal Pod Autoscaler (HPA) [Refer Here](https://blog.stackademic.com/autoscaling-in-kubernetes-with-horizontal-pod-autoscaler-hpa-7ea780f87755)
+37. System Monitoring with Prometheus, Grafana, and Node Exporter [Refer Here](https://medium.com/@DanialEskandari/system-monitoring-with-prometheus-grafana-and-node-exporter-412027684564).
