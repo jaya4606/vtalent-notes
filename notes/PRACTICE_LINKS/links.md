@@ -37,3 +37,6 @@
 35. How to Install Prometheus and Grafana on Ubuntu 22.04 LTS — Configure Grafana Dashboard [Refer Here](https://ibrahims.medium.com/how-to-install-prometheus-and-grafana-on-ubuntu-22-04-lts-configure-grafana-dashboard-5d11e3cb3cfd).
 36. AutoScaling in Kubernetes with Horizontal Pod Autoscaler (HPA) [Refer Here](https://blog.stackademic.com/autoscaling-in-kubernetes-with-horizontal-pod-autoscaler-hpa-7ea780f87755)
 37. System Monitoring with Prometheus, Grafana, and Node Exporter [Refer Here](https://medium.com/@DanialEskandari/system-monitoring-with-prometheus-grafana-and-node-exporter-412027684564).
+38. Best Kubernetes Logging and Monitoring Tools [Refer Here](https://medium.com/@sushantkapare1717/best-kubernetes-logging-and-monitoring-tools-6f4b672e52fd).
+39. Upgrading EKS cluster using Terraform [Refer Here](https://medium.com/@dksoni4530/upgrading-eks-cluster-with-zero-downtime-using-terraform-372f4bb5e7a1).
+40. Terraform Interview Questions [Refer Here](https://medium.com/@dksoni4530/terraform-interview-questions-4988bedcec80).
