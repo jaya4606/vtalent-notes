@@ -93,4 +93,34 @@
 # branching stratagy
 ----------------------------------------------------
  ![preview](./images/project11.png)
+
+
+
+# 10_05_2024
+------------------------------------------------------------------
+# Change management process
+-----------------------------------------------------------------------------
+ ![preview](./images/project12.png)
+  ## change document
+  -------------------------------------
+  ![preview](./images/project13.png)
+
+  * CAB team members are non techinical (process managements).
+
+# Incident process
+--------------------------------------------------------------
+![preview](./images/project14.png)
  
+### incident template
+--------------------------------
+![preview](./images/project15.png)
+
+ # Daily activities
+ -----------------------------------------------------
+![preview](./images/project16.png)
+
+* Incident RCA (root cause analysis).
+ 
+# general suggesions
+---------------------------------------------
+![preview](./images/project17.png)
