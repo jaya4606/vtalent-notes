@@ -1,0 +1,384 @@
+1. can you tel me about yours and your daily activities?
+	kubernets:
+	 1.Deployments
+	 
+	 jenkins-k8 -->pipelinestage --> github/bitbucket/gerrit/svn --> buildstep --> docker build(docker login + docker build + docker push) -->k8 deployment
+	 
+	 k8-deployment :
+	   1. rollingupdate( live)
+	   2. recreate
+	   
+	   3. blue-green/red-yellow
+	   4. canary deployment
+	
+	 maintanance --> Lead time  
+	  1. with
+	  2. without
+	  
+	  
+	  replicas=8
+	    1.10
+		1.11
+		maxsurge  25%,maxunavailable 25%
+		1. 10 pods( 8 old +2 new)
+		2. 8 pods (6 old + 2 new)
+		3. 10 pods ( 6 old + 2 new + 2new)
+		.....
+		8 pods ( all new pods)
+
+troubleshooting:
+   k8 : pod restart
+        cpu/memory issues
+		pod pending
+		k8 volumes full
+		k8 upgrade issues
+	jenkins: 
+	    pipeline failed
+		docker build
+		docker push
+	    github full fail
+	aws : server maintance
+	      security attacted ips blocking
+		  
+Linux:
+=====
+1. connectivity : telnet and ping
+                  difference
+           1. telnet --> specific port ( telnet ip port)
+		    2. ping -->
+2. i have my application deployed into server and i able to access home page but when hit my application url i want to display google.com home page.
+  /etc/host
+  testing.devops.com www.google.co.in
+ 
+3. i have created a file and by default some permissions getting added to that file? can you explain the logic behind it?
+ A ) there umask is functionality availble in linux.
+     umask
+     0002
+	 read-4 write-2 execute-1
+	 664 (666 -0002)=
+4. slow ness of application.
+   1.cpu (top)
+   2 memory (free -m or -G)
+   3. mountpoint full (df -kh)
+   4. application memory utilization (top)
+   5. network delay (ping)
+   6. backend system failure(timeout or sockettimeout or networkadaptor could not establish or java.sql.exception)
+ 
+5. i am trying to deploy an appliction with port number 9090 but it is failing?
+   1. resouce ( cpu and memory or diskspace)
+   2. port already utilized by another process
+   netstat -anlp |grep port
+   
+6. mount point full. how can we find which is file is consuming more space.
+   du -sh /home/kushal*
+   
+7. search a string in file?
+   grep 
+   grep 'bash' filename
+8. i want to replace a string in a file?
+   1. with editing file ( vi --> :s/oldstring/newstrin/g)
+   2. without editing file
+      sed -e 's/httpd/nginx/g' deploy.sh
+9. i want to see the files in a tar file without extracting it?
+   tar -cvf -->create tar file
+   tar -xvf --> extract the tar file
+   tar -tvf    --> to view the files
+   
+10. i want to copy from one server to another ? then i want to verify that file is copied properly?
+    scp filename user@ip:/path
+	scp -r directory user@ip:/path
+	
+	ssh user@ip
+	
+	what is the default used in scp and ssh?
+    22
+11. i have file in that my name is there? i want to see the file content without myname?
+   grep  -v 'httpd' deploy.sh
+   
+12. deploy.sh a b c e --> how many maximum arguments can be passed to shellscript?
+    65536 -- integer range
+ 	
+13. shell script deploy.sh a b c e :
+   $0 -- script name
+   $1 -- argument1 -->a
+   $# -->number of arguments passing to script ->4
+   $@ --> all arguments passed to script --> a b c e
+14. awk or cut
+    cat test.csv |cut -d ' ' -f1,5
+	cat test.csv |awk -F ' ' '{print$3,$5}'
+
+15. soft link vs hardlink
+     ln -s 
+	 ln 
+16. how to debug the shell script?
+    bash -x deploy.sh
+	vi deploy.sh
+	  sex -x
+    #!/bin/bash  -- shebang shell --> which type shell used
+17. how to run process as backgroup or daemon process?
+   java -jar test.jar &	
+   
+18. how to establish password less authentication between servers?
+    ssh-keygen
+19. Cronjobs usage in linux
+
+Git
+===	
+
+git log
+git pull vs git fetch
+git merge vs git rebase
+how to revert the changes?
+git revert --> git reset soft /hard
+git blame filename
+git conflict resolve
+i have modified a code and made commit and merged code in the master? later i have realized that i have made mistake in that code? how to fix it?
+fast forwarding fix
+
+Jenkins
+=======
+1.what default plugins installed as part of jenkins installation?
+2.how many type of pipeline?
+   1. Declarative
+     pipeline{
+	   agent any
+	   tools {
+	    maven 'maven3'
+	   }
+	   environment{
+	   }
+	   stages{
+	     stage(){
+		 agent {
+		  label 'slave1'
+		 }
+		 steps {
+		 }
+		 }
+	 }}
+   2. Scripted
+     node {
+	 
+	 }
+3. how can i execute shell/groovy script inside declarative pipeline.
+   scritpt{
+     sh " echo devops"
+   }
+4. in the master slave configuration, i want to run my job in specific slave node?
+   pipeline{
+     agent {
+	   label 'jenkins-slave'
+	 }
+   }
+5. i want to execute some code irrespective of failure or sucess of job?
+   always{
+   }
+   https://www.jenkins.io/doc/book/pipeline/syntax/
+   
+6. what are the difference between pollscm and build periodically?
+7. how to establish master-slave connectivity?
+8. default port 8080
+
+
+Docker:
+=======
+1. difference between virtualization and containerization?
+2. command to build docker image
+   docker build -t imagename dockerfile-path
+3. how to copy the files from local to docker container or viceversa?
+   docker cp localfilename containerid://path
+   docker cp containerid://path localpath
+4. FROM,COPY,CMD
+   FROM centos:alpine
+   RUN yum install openjdk-11
+   WORKDIR /app/java
+   COPY test.jar .
+   CMD ['java','-jar','test.jar' ]
+   ENTRyPOINT [ 'java','-jar','test.jar']
+   
+5. docker run -d devop9-test abc
+   docker run -d devops9-test --entrypoint abc
+6. docker network type
+   1. bridge( containers)
+   2. overlay( docker swam)
+   3. Host
+   4. None
+   5. macvlan
+7. what is the docker network interface get created when you install docker?
+   docker0
+8. default configuration of docker --> docker info
+9. how to login docker container?
+   docker exec -it <containerid> or <containername> /bin/bash
+10.is it possible to create dockerfile from docker image?
+   yes possible
+11. COPY vs ADD
+12. docker rmi or docker image rm
+
+RUN yum install java
+RUN yum install nodejs
+RUN mkdir -p /app/test
+
+RUN yum install java && yum install nodejs && mkdir -p /app/test
+
+13. how to validate dockerfile or how will you ensure that the dockerfile written is following best practicse?
+ There is concept called linting.
+ hadolint-->https://github.com/hadolint/hadolint
+
+https://docs.docker.com/engine/reference/builder/#exec-form-entrypoint-example
+
+K8:
+---
+1. K8 architecture
+2. kubectl get pods
+3. pod is in pending status? possible reasons?
+4. pod is restart how to findout the reason for it?
+   kubectl describe pod podname
+5. docker exit code 127   
+6. my node is in not-ready status what could be the reasons?
+   1. node down
+   2. kubelet down in that node.
+7. how to do the scheduling disabled?
+   kubectl taint nodename  --> status-- ready,Scheduling Disabled.
+8 want to know the list of pods running in a node and it resouce utilization?
+  kubectl describe node nodename
+9. cpu and memory
+10. what is the service ? types
+    1. clusterip
+	2. nodeport (default : 30000 -32767)
+	3. loadbalancer
+11. deployment types
+    1. recreate
+	2. rollingupdate
+	
+	3. blue-green
+	4. canary
+12. What is the deamonset?
+13. volumes --> static ,dynamic
+14. i want to expand my pvc dynamically?
+      storageclass -->allowvolumeexpansion:true
+15. statefulset.
+
+===================
+Interview Questions
+===================
+1. K8 daily activities?
+   a.pod restart issues
+		memory issue ( Reason:       OOMKiled       Exit Code:    137 )
+		liveness probe(healthcheck) fail  --> http://localhost:80
+   b.Node issues(memory /cpu issue)
+   c.pod performance issue( cpu based issue)
+   d.Volume size full
+   
+2. K8 Architecture and its components.
+   Controlplane/master -- > apiServer,Etcd,Kube-controller,Kube-schedular
+   Worker Nodes --> Kubelet,kube-proxy, Containerd(docker)
+
+3. what is kubelet functionality?
+4. Node status is showing as Not-ready?
+5. how to check the pod status?
+   kubectl get pods
+6. how to check which pod is running on which node?
+   kubectl get pods -o wide
+7. how to identify the pods running in specific node? or how to troubleshoot node performance issue?
+   kubectl describe node <nodename>
+8. allocate resouces to the container or pod?
+   resouces:
+	 requests:
+	   cpu: 
+	   memory
+	 limits:
+	   cpu
+	   memory
+9. my requirement is that i need to place my pod in specific server which is having higher performance?
+   1. NodeSelector based on labels
+   2. Nodename
+   3. Node affinity
+   
+10. i have deployed my application pod and the pod status is showing as pending? reasons?
+   a. The cpu and memory is not available in any one of the node which defined in pod resouces 
+	 Warning  FailedScheduling  27s   default-scheduler  0/4 nodes are available: 1 Insufficient memory, 
+	 1 node(s) had taint {node-role.kubernetes.io/master: }, that the pod didn't tolerate, 
+	 2 node(s) had taint {node.kubernetes.io/unreachable: }, that the pod didn't tolerate.
+   b. the label used in nodeselector or affinity is not matching with node labels.
+      Warning  FailedScheduling  17s   default-scheduler  0/4 nodes are available: 
+	  1 node(s) didn't match Pod's node affinity/selector, 
+	  1 node(s) had taint {node-role.kubernetes.io/master: }, that the pod didn't tolerate, 
+	  2 node(s) had taint {node.kubernetes.io/unreachable: }, that the pod didn't tolerate.
+   c. if all workernodes is down.
+   d. if the PVC used in the pod definition not found/matching.
+
+11. Difference between RC and RS?
+
+12. What are the k8 resouces get created when we deploy the deployment object?
+    1. deployment
+	2. Replicaset
+	3. Pods
+
+13. What are ways we can deploy application in k8?(deployment types)?
+
+14. reasons for CrashLoopBackOff?
+    a. the command defined in container command is not proper .
+	
+	command:
+      - "bin/bash"
+      - "-r" //here -r is not a valid. valid command is -c.
+      - "sleep 10000"
+
+AWS --VPC( --AZ -->3 subenet --> 5  ->10 ->6
+
+
+allowvolumeexpansion: true
+
+AWS
+===
+
+1. Route53
+   type of Route53
+2. IAM user vs Role
+   type of policies --> aws manged/custom/inline
+3. S3 -->limits
+   maximu file size -->5TB
+   multipart upload --> 5MB -5GB
+   default -100
+   s3 lifecycle
+   s3 storage clases -->standard,IA ,One-zone,one-ZoneiA,glacier,Deep Glacier
+   aws object --> pre-signedurl
+   
+4. diff SG VS NACL
+5. How to differential public subnet and private subnet.
+6. CIDR --> 
+
+   172.31.0.0/16 --65536
+CIDR (Classless Inter Domain Routing)
+8	8 8 8
+172.0.0.0/24(mask) --CIRD --2^8 =256 IP allocated to this VPC
+
+251 ip remaing.
+
+8+8+8+8 =32 -25=7
+172.0.0.0/25 --> 2^7=128 subnet 1 (172.0.0.0 --172.0.0.127) -->123
+172.0.0.0 -- Network address
+172.0.0.1 -- Routing purpose
+172.0.0.2 -- DNS purpose
+172.0.0.3 -- Future purpose
+172.0.0.4
+172.0.0.5
+...
+...
+172.0.0.127 (171.0.0.X) -- Broadcasting purpose
+
+172.0.0.128/25 --> 2^7=128 subnet 1 (172.0.0.128 --172.0.0.255)  -->123
+172.0.0.128 -- Network address (subnet range)
+172.0.0.129 -- Routing purpose (subnet+1)
+172.0.0.130 -- DNS purpose (subnet+2)
+172.0.0.131 -- Future purpose (subnet+3)
+172.0.0.132
+172.0.0.5
+...
+...
+172.0.0.255 (171.0.0.X) -- Broadcasting purpose (subnet+x)
+
+===
+
+
+   

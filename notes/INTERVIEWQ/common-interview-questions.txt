@@ -1,0 +1,55 @@
+technologies: git,jenkins,docker,kubernetes
+cloud technologies: AWS VPC,AWS IAM.AWS EC2,AWS S3,AWS WAF,AWS EBS,AWS Loadbalancer,AWS EFS,AWS Route53,AWS Lambda,AWS CloudWatch etc.
+AWS EKS ->
+
+1. Could you please explain about your organization flow? or team structure?
+  
+2. communication tools 
+1. microsoft teams
+2. business skype
+3. webxmeeting
+
+3.how are is your team sharing knowledge?
+  1. with KT(knowledge transfer) sessions.
+  2. attending internal seminors in company.
+
+4. How are u educting team members?
+   KT
+   documents --> Confluence (atalasian company)
+   
+5. project --> ui --> reactjs,angular js,javascript,vuejs,jsp etc.
+               middle --> java/nodejs/python  --> java -jar test.jar
+			   backend --> mysql/mongodb/cassandra/oracle/postgresssql/mariadbe etc
+
+6. task assign --> JIRA (atlasian)
+
+==============
+1. Company locaion
+2. company address
+3. project architecture
+    1. AWS (vpc's,
+	2. K8 
+2 AWS -- 1. dev+test+stage+perf --vpc's
+         2. prod --vpc's
+		 
+1.Prometheus(node,pods level)
+2.Grafana
+
+what is the availability of your application?
+agreement --> 99.5% target
+
+important metrics : CPU & memory
+
+how will you interact to the clients?
+
+MOM -->minutes of Meeting.
+incresing the memory for pods --> devops //
+highlighting to dev and tracking --> devops@devteam
+
+
+
+
+
+
+		 
+		 

@@ -1,0 +1,46 @@
+Terraform Interview Questions
+=============================
+
+1. Resources used in your project.
+    - aws_vpc
+    - aws_security_groups
+    - aws_subnet
+    - natgateway
+    - internetgateway
+
+2. what are the modules?
+
+3. how to validation terraform code writen by you?
+   terraform validate
+
+   - terraform init
+   - terraform validate
+   - terraform plan
+   - terraform apply
+   - terraform destroy
+
+4. what is use of terraform fmt?
+   formating of your terraform code.
+   The terraform fmt command is used to rewrite Terraform configuration files to a canonical format and style.
+
+5. how to apply specific resouce if you have multiple resouces in your terraform file? 
+   https://learn.hashicorp.com/tutorials/terraform/resource-targeting
+   terraform apply --target=aws_vpc.devops11-vpc
+
+6. i have multiple db servers and that need to be created with terraform?
+    count = 2
+
+7. what is template file in terraform? why we use it?
+    file extension .tpl
+    templates/filena.tpl
+   by using object "file"
+
+8. terraform 0.14/0.15/1.0
+   terraform 0.14 init
+   terraform 1.0 init --upgrade
+  
+   
+
+
+
+   

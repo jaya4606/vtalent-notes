@@ -1,0 +1,121 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'SERVER_ADDRESS', defaultValue: '', description: 'Server hostname (e.g., web, dev-chriso, dev-jordanr)')
+        string(name: 'BRANCH', defaultValue: 'master', description: 'Git repository branch to use')
+        string(name: 'CURRENT_USER', defaultValue: '', description: 'Current user (e.g., chriso, jordanr, troyp, kylerb, jwoods)')
+    }
+
+    environment {
+        SERVER_ROOT = '/export/webProjects/'
+        PROJECT_ROOT = 'dealerAccessApps'
+        REPOSITORY_URL = 'git@bitbucket.org:gpmfg/dealerAccessApps.git'
+        TMP_FOLDER = '/tmp/'
+    }
+
+    stages {
+        stage('Set Deployment Server') {
+            steps {
+                script {
+                    if (params.SERVER_ADDRESS == '') {
+                        SERVER_ADDRESS = 'web.greatplainsmfg.com'
+                        echo "Setting deployment server to web.greatplainsmfg.com."
+                    } else {
+                        SERVER_ADDRESS = params.SERVER_ADDRESS + '.greatplainsmfg.com'
+                        echo "Setting deployment server to ${params.SERVER_ADDRESS}.greatplainsmfg.com."
+                    }
+                }
+            }
+        }
+
+        stage('Prompt for Deployment Confirmation') {
+            steps {
+                input('Proceed with deployment?')
+            }
+        }
+
+        stage('Clone and Clean Up Repository') {
+            steps {
+                script {
+                    def CURRENT_DATE_TIME = sh(script: 'date "+%Y%m%d_%s"', returnStdout: true).trim()
+                    def DEPLOY_DIRECTORY = "${PROJECT_ROOT}_deploy_${CURRENT_DATE_TIME}"
+                    def ARCHIVE_DIRECTORY = "${PROJECT_ROOT}_archived_${CURRENT_DATE_TIME}"
+                    sh """
+                    ssh ${params.CURRENT_USER}${SERVER_ADDRESS} /bin/bash << 'EOF'
+                    git clone --recurse-submodules --depth=1 --branch=${params.BRANCH} ${REPOSITORY_URL} ${TMP_FOLDER}${DEPLOY_DIRECTORY}
+                    rm -fR ${TMP_FOLDER}${DEPLOY_DIRECTORY}/.git ${TMP_FOLDER}${DEPLOY_DIRECTORY}/.git* ${TMP_FOLDER}${DEPLOY_DIRECTORY}/*deploy.sh ${TMP_FOLDER}${DEPLOY_DIRECTORY}/.idea ${TMP_FOLDER}${DEPLOY_DIRECTORY}/*DS_Store
+                    cd ${TMP_FOLDER}${DEPLOY_DIRECTORY} && composer update
+                    rm -f ${TMP_FOLDER}${DEPLOY_DIRECTORY}/composer.json ${TMP_FOLDER}${DEPLOY_DIRECTORY}/.env.template ${TMP_FOLDER}${DEPLOY_DIRECTORY}/Dockerfile ${TMP_FOLDER}${DEPLOY_DIRECTORY}/docker-compose.yml ${TMP_FOLDER}${DEPLOY_DIRECTORY}/composer.lock
+                    rm -fR ${TMP_FOLDER}${DEPLOY_DIRECTORY}/gplibraries/.git ${TMP_FOLDER}${DEPLOY_DIRECTORY}/gplibraries/.gitignore
+                    EOF
+                    """
+                }
+            }
+        }
+
+        stage('Rsync Deployment Directory') {
+            steps {
+                script {
+                    sh """
+                    ssh ${params.CURRENT_USER}${SERVER_ADDRESS} /bin/bash << 'EOF'
+                    rsync -aq ${TMP_FOLDER}${DEPLOY_DIRECTORY} ${params.CURRENT_USER}${SERVER_ADDRESS}:${SERVER_ROOT}${PROJECT_ROOT}/deployments/
+                    echo 'Rsync finished.'
+                    EOF
+                    """
+                }
+            }
+        }
+
+        stage('Shell into Deployment Server') {
+            steps {
+                script {
+                    sh """
+                        ssh ${params.CURRENT_USER}${SERVER_ADDRESS} /bin/bash << 'EOF'
+                        echo "Archiving the current deployment"
+                        mv ${SERVER_ROOT}${PROJECT_ROOT}/deployments/current_deployment ${SERVER_ROOT}${PROJECT_ROOT}/deployments/${ARCHIVE_DIRECTORY}
+                        echo "Enabling the new deployment"
+                        mv ${SERVER_ROOT}${PROJECT_ROOT}/deployments/${DEPLOY_DIRECTORY} ${SERVER_ROOT}${PROJECT_ROOT}/deployments/current_deployment
+                        echo "Creating symbolic link for ThemeWrapper assets."
+                        ln -s ${SERVER_ROOT}${PROJECT_ROOT}/deployments/current_deployment/gplibraries/assets/Gpmfg/Common/ThemeWrapper ${SERVER_ROOT}${PROJECT_ROOT}/deployments/current_deployment/assets/Gpmfg/Common/ThemeWrapper
+                        echo "Creating symbolic link for ThemeWrapperV2 assets."
+                        ln -s ${SERVER_ROOT}${PROJECT_ROOT}/deployments/current_deployment/gplibraries/assets/Gpmfg/Common/ThemeWrapperV2 ${SERVER_ROOT}${PROJECT_ROOT}/deployments/current_deployment/assets/Gpmfg/Common/ThemeWrapperV2
+                        echo "Creating symbolic link for Login assets."
+                        ln -s ${SERVER_ROOT}${PROJECT_ROOT}/deployments/current_deployment/gplibraries/assets/Gpmfg/Apps/Login ${SERVER_ROOT}${PROJECT_ROOT}/deployments/current_deployment/assets/Gpmfg/Apps/Login
+                        echo "Creating symbolic link for DealerSearch assets."
+                        ln -s ${SERVER_ROOT}${PROJECT_ROOT}/deployments/current_deployment/gplibraries/assets/Gpmfg/Apps/DealerSearch ${SERVER_ROOT}${PROJECT_ROOT}/deployments/current_deployment/assets/Gpmfg/Apps/DealerSearch
+                        echo "Creating symbolic link for SalesForecast assets."
+                        ln -s ${SERVER_ROOT}${PROJECT_ROOT}/deployments/current_deployment/gplibraries/assets/Gpmfg/Apps/SalesForecast ${SERVER_ROOT}${PROJECT_ROOT}/deployments/current_deployment/assets/Gpmfg/Apps/SalesForecast
+                        echo "Creating symbolic link for CoopAdvertisingCreditRequest assets."
+                        ln -s ${SERVER_ROOT}${PROJECT_ROOT}/deployments/current_deployment/gplibraries/assets/Gpmfg/Apps/CoopAdvertisingCreditRequest ${SERVER_ROOT}${PROJECT_ROOT}/deployments/current_deployment/assets/Gpmfg/Apps/CoopAdvertisingCreditRequest
+                        EOF
+                    """
+                }
+            }
+        }
+
+        stage('Remove Temporary Files') {
+            steps {
+                script {
+                    sh """
+                    ssh ${params.CURRENT_USER}${SERVER_ADDRESS} /bin/bash << 'EOF'
+                    rm -fR ${TMP_FOLDER}${DEPLOY_DIRECTORY}
+                    EOF
+                    """
+                }
+            }
+        }
+
+        stage('Completion Message') {
+            steps {
+                echo "Deployment of ${PROJECT_ROOT} to ${SERVER_ADDRESS} complete."
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Pipeline completed."
+        }
+    }
+}

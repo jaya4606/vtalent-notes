@@ -1,0 +1,37 @@
+1. explain about k8 architecture?
+
+2. what is the command used to get the pod status? or how to check pod status?
+   kubectl get pods
+3. i want to list pods which are not in running status?
+   
+   kubectl get pods|grep 'Running'  --> list all running pods
+   kubectl get pods|grep -v 'Running' --> list all pods except running.
+4. how to findout k8 version?
+   kubectl get nodes
+NAME          STATUS   ROLES           AGE     VERSION
+k8-master     Ready    control-plane   4d      v1.24.0
+k8-worker-1   Ready    <none>          3d23h   v1.24.0
+k8-worker-2   Ready    <none>          3d23h   v1.24.0
+
+5. i got deployment request and i created a pod in the k8 cluster. now i want to see the pod ip address and which node that pod is running?
+   kubectl get pods -o wide
+
+6. what are the possible reasons where pod can be in pending status?
+
+    1. if the nodeselector is not matching with node labels.
+    2. memory is not enough to place a pod.
+    3. cpu is not enough to place a pod.
+    4. you have defined nodeslector and the node is available but i was in SchedulingDisabled.
+       k8-worker-1   Ready,SchedulingDisabled   <none>          34d   v1.24.0
+
+7. what are the reasons for " CrashLoopBackOff"?
+   1. if the pods contains multiple containers and two pods trying to use the same port number.
+      ex: nginx and httpd uses same port 80
+
+   2. if you have defined healcheck with liveness probe with url. then that liveness probe fails for multiple times.
+  Normal   Killing    7m55s (x3 over 8m55s)   kubelet            Container nginx failed liveness probe, will be restarted
+  Normal   Pulled     7m54s (x4 over 9m24s)   kubelet            Container image "nginx:1.20.1" already present on machine
+  Normal   Created    7m54s (x4 over 9m24s)   kubelet            Created container nginx
+  Normal   Started    7m54s (x4 over 9m24s)   kubelet            Started container nginx
+  Warning  Unhealthy  7m45s (x10 over 9m15s)  kubelet            Liveness probe failed: HTTP probe failed with statuscode: 404
+  Warning  BackOff    4m22s (x10 over 6m54s)  kubelet            Back-off restarting failed container

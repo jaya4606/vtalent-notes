@@ -1,0 +1,117 @@
+Interview Questions:
+-------------------
+
+Linux:
+=====
+
+1. command to know the kernal version
+
+   uname -r
+   
+2. i have directory and in that i have number of files. how will you identify the latest modified file.
+   ls -lrth
+   
+3. i have a file and in need to find the occurance of specific string " Error" .
+    grp 'Error' filename | wc -l
+
+4. assume that the disk filled to 100%. how will you identify which files consuming more space.
+    df -kh -->to know the % of utilization
+	du -sh *
+	
+5. how many days the server is up state?
+   standard pactice to reboot system : every 6 months
+   uptime
+ 04:11:55 up  1:16,  1 user,  load average: 0.04, 0.03, 0.05
+  
+6. when i am trying to access my application . it is getting responded slowly? how will you troubleshoot and find the solution for this issue?
+  
+  facebook.com (DNS) --> Nameservers --> Loadbalancer --> apache webserver.
+  
+  1. cpu utilization -- top
+  2. memory utilization -- free 
+  3. check the open files count -- lsof
+  4. sever i/o statistics -- iostat/vmstat
+  
+7. i want to check the connectivy from one server to another?
+   ping
+   telnet
+   
+8. command to check the files list without extracting the tar file?
+
+   extract : tar -xvf test.tar
+   without extract: tar -tvf test.tar
+   
+9. what is the command will you use to find out number of users in linux server?
+   cat /etc/passwd
+   
+10. i want to replace a string in a file without editing in vi editor?
+   sed --> streaming editor
+   sed -i s/oldstring/newstring/g filename
+
+11. to remove the spaces from variable.
+    name="    devops     "
+    echo $name | tr -d ' '
+
+12. how many max number of command line arguments can be passed to script.
+    bash test.sh 1 2 3 4 
+	maximum: 65535
+	
+
+Git :
+----
+
+1. what is the diff b/w git fetch and pull?
+   git fetch == fetch the object and kept the fetch_header record those chagnes but it will not commit automatically.
+   
+   git pull == it fetches the changes and commit automatically
+   
+   git pull == git fetch + git commit
+   
+2. suppose you are working on the repository and you already cloned to your local but later someother team member has pushed some changes to remote repo. how will you sync to your local?
+   git pull
+   
+3. how will you resolve the git merge conflicts?
+   git mergetool
+   
+4. diff b/w git merge and git rebase?
+   git merge :  merge will be happend but there is an extra commit added to indicate merge commit. And also the history will not be in proper order.
+   
+   git rebase: merge will be happend and it will re-write the history. so that i have clean history of your commit.
+   
+5. how are u going to merger your changes to master branch? what is process followed?
+   we have to raise PR reqeust and it will goes to manger for review then he will approve and merge it.
+   
+6. how to are u connectiong your repositories?
+   1. git token
+   2. ssh authentication --> prefered.
+
+7. suppose you have some changes made into your master branch and in between you were trying switch to test branch. how to save the changes which you made into to master branch?  
+
+ git checkout test
+error: Your local changes to the following files would be overwritten by checkout:
+        users.txt
+Please commit your changes or stash them before you switch branches.
+Aborting
+
+git stash
+Saved working directory and index state WIP on master: b27b25e added files
+
+8. you have made few chagnes and commited . after that other team members are alos commit few more chagnes then later it was identified that your commit has issue.
+
+  1. Fast forwarding commit.
+  2. cherry-pick commit
+  
+  
+
+
+   
+
+	
+    	
+   
+   
+   
+  
+  
+  
+   

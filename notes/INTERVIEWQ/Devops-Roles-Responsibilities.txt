@@ -1,0 +1,108 @@
+Devops Roles & Responsibilities:
+================================
+1.Infrastructure provisioning by using Terraform.
+   - EKS
+2. Creating IAM Users and providing access.
+3. Creating IAM roles and providing appropriate access.
+4. Creation of WAF and its Rules.
+5. Route53 integration with External DNS.(company DNS)
+6. providing Bastion/operation machine access to team members.
+7. Helm installation in Bastion machine.
+8. configuration of prometheus in eks cluster.
+9. Setup of grafana in eks cluster.
+10. Jenkins setup in EKS cluster.
+11. Nginx Ingress configuration to access grafana/promethus/jenkins url.
+12. Jenkins to AWS integration --> artifact store in s3.
+13. Created pipeline jobs by integration Git,MavenBuild and nexus.
+14. Jenkins to Kubernetes ingrations.
+15. Configuring smoketest to run every 10 min in jenkins by using build periodically option.
+16. AWS Instance migration
+     1. one type of instance to other type.
+	 2. changing intel to amd processor instance types.
+17. created pipeline jobs to deploy microservices in kubernetes.
+      - ReactJs/Angularjs
+	  - Java
+	  - Redis/Oracle/MongoDB/Cassandra
+18. Email notification configuration in Jenkins for build failures.
+19. Github/Bitbucket webhook configurations.
+20. Dockerfile creation and building docker images.
+21. Linting Dockerfile by using Hadolint.
+22. S3 bucket creation and applying policies.
+23. configuring HPA for deployment object.
+24. Creating repositories/branches requested by Developer.
+25. Created python boto3 code scale down/scaleup eks workernodes and configured in jenkins pipeline.
+     1. workers ASG group update.
+     2. kubectl scale <deploy> -n <namespace> --replicas=3	 
+
+Devops Support:
+---------------
+1. EKS Cluster version upgrade
+    steps: 1. console addon
+	       2. console cluster upgrade.
+		   3. cordon all the workernodes.
+		   4. modify the terraform code and apply the chagnes.
+		   5. rotate the nodes and deployment.
+2. Troubleshooting node memory/cpu issues/volume issues.( instance type)
+3. Kubernetes pod restart issues.(OOM error)
+4. performing deploying in EKS by using jenkins.(latest docker images)
+5. memory parameter changes/ cpu changes in k8 yaml (or) helm charts.
+6. providing jenkins Role based access to the team.
+7. providing prometheu/grafana access to team members.
+8. Raising AWS support ticket for the ec2 issues.
+9. providing git/bitbucket access to developer.
+    1. add members --email.
+	2. take the developer ssh key -- > add that ssh key into git/bitbucket.
+10. providing AWS s3 bucket pre-signed url.
+11. Node maintance activity in k8
+12. restarting of aws instances when we have memory issues.( 1/2 checks passed)
+13. startup and shutdown of test,perf testing environments based on the testing requirements.
+    java
+	reactjs
+	database
+	test-eks-microservices-down
+	kubectl scale deploy <deployname> -n <namespace> --replicas=0
+	test-eks-microservices-down
+	kubectl scale deploy <deployname> -n <namespace> --replicas=3
+-- crated pipeline to auto restart microservices.
+    - we have microservice developed in java and that pod is getting restarted due to OOM every 2 days.
+	  The developer confirmed that this is going to fix in next release (30day)
+	  
+	workaround solution: create pipeline job to run daily at 1UTC.(build periodically)
+	     stage("restart java service"){
+		   steps{
+		      kubectl rollout restart deploy <deployname> -n <namespace>
+		   }
+		 }
+	
+14. Grafana customDashborad creations based on the requirements.
+15. prometheus/grafana alert configurations.
+16. Increasing PVC volume sized dynamically.
+     1. kubectl edit pvc <pvcname>
+	 2. increasing disk volume from aws console.
+17. Blocking IP's in AWS WAF rules( whitelisting/blocklisting)
+18. AWS cloudwatch alert configurations.
+19. Pending JIRA tickets tracking.
+
+Ansible:
+--------
+1. Ansible configuration
+2. Writing ansible playbook
+3. Creating ansible Roles 
+4. deployments in tomcat by using ansible.
+   1. copying artifact to server.
+   2. configurations changes by using jinja2 templates.
+   3. restarting of services.
+5. installation of security tool (taniam/cloudstrike) in all instance.
+6. configurating custom scripts(log archival) created.
+7. created users requrested by security team to deploy security tools.
+
+--hosts: all
+  name: user crations
+  become: yes
+  tasks:
+    user:
+	  name: devops
+  
+  
+   
+   	
