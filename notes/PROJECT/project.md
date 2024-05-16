@@ -1,3 +1,7 @@
+# 08/05/2024
+----------------------------------------
+----------------------------------------
+
 ## project
 ----------------------------------------------------------------
 1. how to explain the project in interviewes?
@@ -46,3 +50,47 @@
 ![preview](./images/project6.png)
 ![preview](./images/project7.png)
 ![preview](./images/project8.png)
+
+
+
+# 09/05/2024
+---------------------------
+---------------------------
+
+# EKS cluster
+--------------------------------------------------------------------------
+### worker nodes
+-----------------------
+![preview](./images/project9.png)
+* bastian machine: `t2.medium`.
+* jenkins: `m5.2xlarger`.
+* atleast `10 worker nodes` with different sizes.
+### questions
+---------------------
+1. which region?
+2. how many subnets public/private?
+   * in eks cluster we have by default 3 public and 3 private.
+3. is hpa enabled for all microservices?
+   * no one enabled hpa for databases.
+   * we r using aws rds.
+4. how r u assigning specific microservices to specific nodes?
+   * `nodeselector` and `node affinity`.
+5. how often seen issues in the eks cluster?
+   * no issues with EKS cluster,only issues in pods and nodes.
+  pods:
+    * restarting pods.
+    * pending status pods.
+    * cpu and memory.
+  workernodes:
+    * if there is any unplanned maintaince/issues from AWS.
+6. how frequently u do the EKS upgrade?
+   * every new release available for every 6 months.
+
+# Sprint Release
+--------------------------------------------------------
+ ![preview](./images/project10.png)
+  
+# branching stratagy
+----------------------------------------------------
+ ![preview](./images/project11.png)
+ 
