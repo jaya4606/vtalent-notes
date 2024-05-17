@@ -124,3 +124,53 @@
 # general suggesions
 ---------------------------------------------
 ![preview](./images/project17.png)
+
+
+11/05/2024
+--------------------------------------------------------------------------------
+
+# issues faced in devops?
+
+1. jenkins jan 2024 issues
+2. terraform after `1.5`  it should be licensed.
+   * HCL aquired by IBM.[Refer Here](https://www.forbes.com/sites/justinwarren/2024/04/26/ibm-is-buying-hashicorp-what-comes-next/?sh=b3c1b6e2ba59)
+   * [Refer Here](https://www.bluetab.net/en/introduction-to-hashicorp-products/) for Hasicorp products.
+
+# AWS ECS vs AWS EKS
+------------------------------------------------------------------------
+![preview](./images/project18.png)
+
+* [Refer Here](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.2/guide/ingress/annotations/#wafv2-acl-arn) for `WAF` rules in ingress controller annotations.
+![preview](./images/project19.png)
+
+# Alternatives for terraform
+----------------------------------------------
+* Top Infrastructure as Code Tools and Terraform Alternatives [Refer Here](https://www.env0.com/blog/best-infrastructure-as-code-tools-and-terraform-alternatives)
+1. OpenTofu [Refer Here](https://opentofu.org/).
+2. Pulumi [Refer Here](https://www.pulumi.com/).
+3. Spacelift [Refer Here](https://spacelift.io/).
+4. Terragrunt [Refer Here](https://terragrunt.gruntwork.io/).
+
+### terraform article??
+
+
+## ssl certificates?
+![preview](./images/project20.png)
+![preview](./images/project21.png)
+![preview](./images/project22.png)
+![preview](./images/project23.png)
+![preview](./images/project24.png)
+
+# Openshift
+----------------------------------------------------------------
+* PAAS
+![preview](./images/project25.png)
+
+# amazon prometheus
+-------------------------------------
+![preview](./images/project26.png)
+
+# Regular Activities
+-------------------------------------------
+![preview](./images/project27.png)
+
