@@ -17,13 +17,20 @@ myname="balu mahendra"
 mycourse="aws devops"
 institute="vtalent"
 echo " my name is $myname, i am learning $mycourse in the $institute "
+echo " --EOS-- "
 ```
 ## Array variables
 ----------------------------------------------------
 ![preview](./images/shell31.png)
 ![preview](./images/shell32.png)
 
-
+### `example`
+```bash
+tools=(bitbucket gitlab nexus podman openshift opentofu)
+echo " ${tools[-1]} "
+echo " ${tools[-3]} "
+echo " ---EOS--- "
+```
 
 * vi array.sh
   
@@ -48,6 +55,7 @@ echo " the container orchestration tool is ${TOOL[3]} "
 echo " the IaaC tool is ${TOOL[5]} "
 echo " the tools i was learned so far were ${TOOL[*]} " 
 echo " the tools i was learned so far were ${TOOL[@]} " 
+echo "---EOS---"
 ```
 
 
@@ -71,7 +79,7 @@ echo " the tools i was learned so far were ${TOOL[@]} "
 devops_tools=(git jenkins maven docker k8s terraform ansible)
 echo " the vcs tool is ${devops_tools[0]} "
 echo " the configuration management tool is ${devops_tools[6]} "
-
+echo " ---EOS---"
 ```
 ### `example2`
 ```bash
@@ -82,7 +90,7 @@ echo " the vcs tool is ${devops_tools[0]} "
 echo " the ci/cd tool is ${devops_tools[1]} "
 echo " the configuration management tool is ${devops_tools[6]} "
 echo " the devops tools are ${devops_tools[*]} "
-
+echo " ---EOS---"
 ```
 
 
@@ -101,7 +109,7 @@ name=balumahendra
 value1=10
 echo "\$name=$name"
 echo "value1=$value1"
-
+echo " ---EOS---"
 ```
 ### `example2`
 ---------------------------------------------------------------------
@@ -111,5 +119,5 @@ name=balumahendra
 value1=10
 echo "name=$name"
 echo "\$value1=$value1"
-
+echo " ---EOS--- "
 ```
