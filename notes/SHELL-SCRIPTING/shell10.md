@@ -88,3 +88,24 @@ tail -f nohup.out
 ------------------------------------------------
 ![preview](./images/shell205.png)
 ![preview](./images/shell206.png)
+
+
+# use cases of shell scripting
+1. write script for stop and start the ec2 instance.
+* `ans`:
+* create file in the root folder to write a script `vi /root/.ec2instance_start.sh` 
+```bash
+#!/bin/bash
+aws ec2 start-instances --instance-ids <instance-id>
+```
+* create a another file in root `vi /root/ec2instance_stop.sh`.
+```bash
+#! /bin/bash
+aws ec2 stop-instances --instance-ids <instance-id>
+```
+* give executed permissions to both the files.
+```
+$ chmod +x /root/ec2instance_start.sh
+$ chmod +x /root/ec2instance_stop.sh
+```
+
