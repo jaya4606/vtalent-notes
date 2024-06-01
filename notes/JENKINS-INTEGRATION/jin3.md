@@ -1,158 +1,80 @@
-## Lens
--------------------------------------------------------------------------
-* [Refer Here](https://k8slens.dev/) for official docs.
-![preview](./images/jin38.png)
-![preview](./images/jin39.png)
-![preview](./images/jin40.png)
-![preview](./images/jin41.png)
-![preview](./images/jin42.png)
-* profile added to jenkins server for authentication of EKS clusteer.
-![preview](./images/jin43.png)
-* `Instance-profile` will not use in windows.we have to use `AWS configure`.
-
-## EKS continution...
-------------------------------------------------------------------------------------
-* [Refer Here](https://github.com/orgs/Talent-devops18/repositories) for the EKS repo.
-![preview](./images/jin44.png)
-![preview](./images/jin45.png)
-![preview](./images/jin46.png)
-* in the service.yaml in helm chart create a network or internal laodbalencer.
-![preview](./images/jin47.png)
-* we need to add some annotations to service.yaml file.
-![preview](./images/jin48.png)
-![preview](./images/jin49.png)
-* [Refer Here](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.2/guide/service/nlb/) for the annotations.
-![preview](./images/jin50.png)
-![preview](./images/jin51.png)
-![preview](./images/jin52.png)
-* to connect database pod.
-```
-kubectl get po -n database
-```
-![preview](./images/jin53.png)
-![preview](./images/jin54.png)
-* springboot application automatically creates database tables.
-![preview](./images/jin55.png)
-![preview](./images/jin56.png)
-![preview](./images/jin57.png)
-
-### react js app
---------------------------------------------------------------------
-* create the helm charts for react js application.
-![preview](./images/jin58.png)
-```
-vi chart.yaml
-```
-![preview](./images/jin59.png)
-```
-cd templates
-ls -al
-```
-* keep default namespace.
-* change the values in values.yaml
-```
-vi values.yaml
-```
-![preview](./images/jin60.png)
-![preview](./images/jin61.png)
-![preview](./images/jin62.png)
-![preview](./images/jin63.png)
-![preview](./images/jin64.png)
-* goto templates and add annotations in service.yaml file to create a load balencer.
-![preview](./images/jin65.png)
-* in annotations `IP` means in loadbalencer target groups it is pointing to `pod IPs`. all the worker nodes.
-![preview](./images/jin66.png)
-* in annoptaions `Instance` means load balencer target groups it is pointing to `Instance`.
-![preview](./images/jin69.png)
-![preview](./images/jin67.png)
-* check weather it is creating loadbalencer or not.
-![preview](./images/jin68.png)
-![preview](./images/jin70.png)
-
-* connect to the loadbalencer url inthe browseer frontend by port number 80.
-![preview](./images/jin71.png)
-![preview](./images/jin72.png)
-* react js is not connected to java,so we didnot see any data here.
-* to troubleshoot these kind of issues by inspecting the network.
-![preview](./images/jin73.png)
-![preview](./images/jin74.png)
-![preview](./images/jin75.png)
-![preview](./images/jin76.png)
-* when you change the url obviously write a new dockerfile and build a new image and push to ECR.
-![preview](./images/jin77.png)
-* we can do alternative metod.
-   * create one DNS and repoint to your java loadbalencer.
-   * create a new record.
-  ![preview](./images/jin78.png)
-  ![preview](./images/jin79.png)
-  ![preview](./images/jin80.png)
-  ![preview](./images/jin81.png)
-  ![preview](./images/jin82.png)
-  ![preview](./images/jin83.png)
-* create a new version in helm charts. front end.
-![preview](./images/jin84.png)
-* to drop the cache in the servers.
-![preview](./images/jin85.png)
-* upgrade the helm chart of front end by.
-  ![preview](./images/jin86.png)
-  ![preview](./images/jin87.png)
-* create a new DNS record 
-![preview](./images/jin88.png)
-![preview](./images/jin89.png)
-![preview](./images/jin90.png)
-![preview](./images/jin91.png)
-![preview](./images/jin92.png)
-![preview](./images/jin93.png)
-* if i delete the pod data lose? or not?
-   * data will be stored. the volume will be taken care of AWS.it depends on storage class.
-![preview](./images/jin94.png)
-![preview](./images/jin95.png)
-![preview](./images/jin96.png)
-
-# AWS RDS
------------------------------------------------------------------------------------------
-* we can create pod as a database or we can use aws database.
-* how would you use RDS in k8s.
-![preview](./images/jin97.png)
-* we can add this endpoint in in `application.proiperties` in java.
- ![preview](./images/jin98.png)
- * we need to check the configmap to update with new detalis of the database.
-  ![preview](./images/jin99.png)
-```
-kubectl get cm -n springboot
-kubectl get cm spring-configmap -n springboot -o yaml
-```
-![preview](./images/jin100.png)
-* to reflect these changes we have to do deployment
-```
-kubectl get deploy -n springboot
-```
-![preview](./images/jin101.png)
-* application is not running describe the pod.after that check the logs by,
-```
-kubectl describe po <pod-name> -n <namespace>
-kubectl logs -f <pod-name> -n <namespace>
-```
-* application is not running because app is not connected to database.because we did not create any schema for the employees databses.
-![preview](./images/jin102.png)
-* from k8s cluster we can connect to RDS for that we a some temporary pod.
-
-## service types (ExternalName)
-![preview](./images/jin103.png)
-* [Refer Here](https://kubernetes.io/docs/concepts/services-networking/service/) for the extername service type.
+* create a EKS cluster in jenkins pipeline.
+  ![preview](./images/jin110.png)
+  ![preview](./images/jin111.png)
+  ![preview](./images/jin112.png)
+* till now we already push the java image and nodejs image to ECR.
+* we get the mariadb from official dockerhub.download(pull) the image and push this to ECR.
+* write a pipeline for mariadb image to download from dockerhub and push it to ECR.
+* create a new ECR repository.
+![preview](./images/jin113.png)
+![preview](./images/jin114.png)
+![preview](./images/jin115.png)
+* jenkins server consumes disk space because of the docker images so we have clean the images after docker push completed.
+  ![preview](./images/jin116.png)
+  ![preview](./images/jin117.png)
+  ![preview](./images/jin118.png)
+  ![preview](./images/jin119.png)
+* now we have 3 images of java,nodejs and mariadb.
+ ![preview](./images/jin120.png)
+ * [Refer Here](https://hub.docker.com/_/mariadb) for the docker image.
   
-### How to connect RDS from k8s cluster or EKS [Refer Here](https://dev.to/bensooraj/accessing-amazon-rds-from-aws-eks-2pc3)
-* busybox.temporary command shell.
-![preview](./images/jin104.png)
-![preview](./images/jin105.png)
-![preview](./images/jin106.png)
-* no data in the RDS databse.
-![preview](./images/jin107.png)
-* insert the data in the web.
-  ![preview](./images/jin108.png)
-   ![preview](./images/jin109.png)
-   
+## Springboot Application
 
+![preview](./images/jin121.png)
+* in the react js front end code we define the backend  java url.
+  ![preview](./images/jin122.png)
+* in the backend java code we define base url of the front end.
+  ![preview](./images/jin123.png)
+* mariadb url get from java code.
+  ![preview](./images/jin124.png)
+  ![preview](./images/jin125.png)
+  ![preview](./images/jin126.png)
+* lets create the eks cluster.
+![preview](./images/jin127.png)
+* now we have to connect EKS cluster in bastion server not in jenkins server.by
+```
+aws eks update-kubeconfig --region us-west-2 --name <clustername>
+```
+![preview](./images/jin128.png)
+![preview](./images/jin129.png)
+* what role was allocated to jenkins server same role will be allocated to bastion machine.
+  ![preview](./images/jin130.png)
+  ![preview](./images/jin131.png)
+  ![preview](./images/jin132.png)
+  ![preview](./images/jin133.png)
+  ![preview](./images/jin134.png)
+* after creating the cluster we need to deploy least depency of the application so we can deploy mariadb by using helm charts.
+* [Refer Here](https://github.com/bitnami/charts/blob/main/bitnami/mariadb/README.md) for maraidb helmchart.
+* bitnami was the vmware company.
+![preview](./images/jin135.png)
 
+* create a one repo for the mariadb.move the maraidb to separate folder and make it as git repo.commit all the files in mariadb.
+![preview](./images/jin136.png)
+* create a new private repository in github.
+  ![preview](./images/jin137.png)
+* check the values.yaml by
+```
+less values.yaml
+```
+![preview](./images/jin138.png)
 
+* create a new file with modified values.
+  ![preview](./images/jin139.png)
+  ![preview](./images/jin140.png)
+* commit the changes and push to repo.
+* now create a pipeline to deploy the helm charts.
+## jenkins integration with kubectl and helm
 
+* install kubectl [Refer Here](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html) and install helm [Refer Here](https://docs.aws.amazon.com/eks/latest/userguide/helm.html) in jenkins server with jenkins user.
+![preview](./images/jin141.png)
+![preview](./images/jin142.png)
+* we dont have a `.kube` folder in jenkins server.
+  ![preview](./images/jin143.png)
+* now install helm.
+  ![preview](./images/jin144.png)
+* write a new jenkinsfile to run the mariadb with helm.
+  ![preview](./images/jin145.png)
+  ![preview](./images/jin146.png)
+  ![preview](./images/jin147.png)
+  ![preview](./images/jin148.png)
+* create namespace by command.
