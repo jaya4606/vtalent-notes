@@ -109,14 +109,50 @@ vi values.yaml
 ![preview](./images/jin95.png)
 ![preview](./images/jin96.png)
 
-
-
-
-
-
-
-## AWS RDS
+# AWS RDS
 -----------------------------------------------------------------------------------------
+* we can create pod as a database or we can use aws database.
+* how would you use RDS in k8s.
+![preview](./images/jin97.png)
+* we can add this endpoint in in `application.proiperties` in java.
+ ![preview](./images/jin98.png)
+ * we need to check the configmap to update with new detalis of the database.
+  ![preview](./images/jin99.png)
+```
+kubectl get cm -n springboot
+kubectl get cm spring-configmap -n springboot -o yaml
+```
+![preview](./images/jin100.png)
+* to reflect these changes we have to do deployment
+```
+kubectl get deploy -n springboot
+```
+![preview](./images/jin101.png)
+* application is not running describe the pod.after that check the logs by,
+```
+kubectl describe po <pod-name> -n <namespace>
+kubectl logs -f <pod-name> -n <namespace>
+```
+* application is not running because app is not connected to database.because we did not create any schema for the employees databses.
+![preview](./images/jin102.png)
+* from k8s cluster we can connect to RDS for that we a some temporary pod.
 
+## service types (ExternalName)
+![preview](./images/jin103.png)
+* [Refer Here](https://kubernetes.io/docs/concepts/services-networking/service/) for the extername service type.
   
+### How to connect RDS from k8s cluster or EKS [Refer Here](https://dev.to/bensooraj/accessing-amazon-rds-from-aws-eks-2pc3)
+* busybox.temporary command shell.
+![preview](./images/jin104.png)
+![preview](./images/jin105.png)
+![preview](./images/jin106.png)
+* no data in the RDS databse.
+![preview](./images/jin107.png)
+* insert the data in the web.
+  ![preview](./images/jin108.png)
+   ![preview](./images/jin109.png)
+   
+
+
+
 
