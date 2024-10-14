@@ -503,4 +503,27 @@ kubectl get daemonset -n kube-system
 ### 28. What is the SCM you used in your project?
 * Git
 ### 29. what are the types of vpc endpoints?
-* 
+* VPC Endpoints are used to securely connect your Amazon Virtual Private Cloud (VPC) to AWS services or other resources without needing to traverse the public internet.
+### 1. Interface Endpoints:
+* Interface Endpoints use an `elastic network interface (ENI)` in your VPC to connect to supported AWS services using private IP addresses within your VPC.
+* You associate the endpoint with one or more subnets in your VPC, and traffic to the supported AWS service is routed through the ENI.
+* Services such as Amazon EC2 API, Amazon S3 API (not the data plane), AWS Systems Manager, Lambda, Secrets Manager, KMS, CloudWatch, and many more.
+* Interface Endpoints `charge` based on the number of hours the endpoint is active and the amount of data processed.
+### 2. Gateway Endpoints:
+* Gateway Endpoints are used to connect your VPC to supported AWS services by adding a target to your route table. 
+* Traffic destined for the service is routed privately through the AWS backbone.
+* Currently, Gateway Endpoints support only Amazon S3 and DynamoDB.
+* Gateway Endpoints are `free to use`; there are no hourly or data processing charges.
+![preview](./images/aws_vpc_endpoints.jpg)
+### 30.what is the aws control tower?
+### AWS Organizations:
+* Ideal for organizations that want to manage multiple AWS accounts with custom governance models.
+* Suitable for advanced users who want more control and flexibility over how accounts are organized, governed, and secured.
+### AWS Control Tower:
+* Ideal for organizations that want a quick start with a pre-configured, well-architected multi-account environment.
+* Suitable for teams that want to enforce AWS best practices and security policies without extensive manual configurations.
+![preview](./images/aws_contro_tower.jpg)
+### 31. what is aws athena?
+* AWS Athena is a serverless, interactive query service that allows you to analyze data directly in Amazon S3 using SQL. 
+* You can run queries on structured, semi-structured, or unstructured data, such as CSV, JSON, Parquet, and ORC files, without needing to set up complex data pipelines or infrastructure.
+* use cases are Log Analysis,Ad-hoc Data Exploration,Big Data Analytics,Business Intelligence (BI) Integration,Data Lake Queries.
