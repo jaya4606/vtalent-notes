@@ -1,8 +1,8 @@
 # wipro
 ---------------------------------------------------------------
 ### 1. Tell me about yourself and roles and responsibility?
-* My name is `siraj`, and I have over all `4.7 years` of experience in DevOps and build/release process. Throughout my career, I've been involved in setting up and maintaining CI/CD pipelines and delivering releases for multiple applications running on Linux-based distributed infrastructure.
- - Currently I'm working as a DevOps engineer at Dhatsol IT solutions from 2020 to till date.
+* My name is `name`, and I have over all `4.7 years` of experience in DevOps and build/release process. Throughout my career, I've been involved in setting up and maintaining CI/CD pipelines and delivering releases for multiple applications running on Linux-based distributed infrastructure.
+ - Currently I'm working as a DevOps engineer at `xxx IT solutions` from 2020 to till date.
 * the tools I worked on are:-
  1. I have managed and configured Git repositories, set up branching and tagging and handled merge requests and notifications to streamline the development process and integrating Git with Jenkins.
  2. I have used maven for building artifacts such as Jar and War files from the source code. this is important in automating the build process and integrating with Jenkins for continuous integration.
@@ -265,14 +265,242 @@ pipeline {
 * example: A team may define a Quality Gate that requires at least 80% code coverage by tests, no new security vulnerabilities, and a technical debt ratio under 5%. If any of these thresholds are not met, the Quality Gate will fail, and the team will have to fix the issues before merging or deploying the code.
   
 ### 18.  Tell me pipeline configuration in your project?
-2.  Have worked on EKS 
-3.  What is the purpose kube-scheduler in eks
-4.  What is the purpose of default schedular?
-5.  What is the purpose of HPA?
-6.  What is usage Aws waf
-7.  Why you are using aws waf we have a security group for blocking ip address?
-8.  How to con figure eks cluster in cloud watch
-9.  What is purpose of Prometheus and grafana
-10. Why grafana needed already we have a premotheus.
-11. What is the SCM you used in your project?
-12. what are the types of vpc endpoints?
+* there r different stages in our pipeline.
+```jenkinsfile
+pipeline 
+  agent any {
+   stages {
+    stage('checkout') {
+        steps {
+            echo "git checkout"
+        }
+    stage('sonar analysis') {
+        steps {
+            echo "sonar analysis"
+        }
+    stage('build') {
+        steps {
+            echo "mavn package"
+        }
+    stage('archive') {
+        steps {
+            echo " archive the artifacts "
+
+        }
+    }
+   }
+```
+### 19.  Have worked on EKS ?
+* yes.
+
+### 20.  What is the purpose kube-scheduler in eks?
+* It watches for new work tasks and assigns them to healthy nodes in the cluster.
+### 21.  What is the purpose of default schedular?
+
+### 22.  What is the purpose of HPA?
+* HPA increases or decreases the number of running pod replicas based on the workload. 
+* It scales "horizontally," meaning it adds or removes replicas of pods rather than increasing the size of an individual pod ("vertical scaling").
+* The HPA controller in Kubernetes queries the metrics server (such as Kubernetes Metrics Server, Prometheus, or Custom Metrics API) to retrieve real-time resource utilization data (e.g., CPU or memory usage).
+* Based on the metrics, it determines whether to scale the number of pod replicas up or down. For example, if the average CPU utilization across the pods in a deployment exceeds a certain threshold (e.g., 70%), HPA will add more replicas to handle the load.
+```yaml
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: my-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-app-deployment
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+```
+### Custom Metrics in HPA:
+* In addition to CPU and memory metrics, HPA can also use custom metrics (such as request count, latency, or any application-specific metric). 
+* This is done by integrating the Kubernetes cluster with a metrics provider like Prometheus or a custom metrics API.
+```yaml
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: custom-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-app-deployment
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Pods
+    pods:
+      metric:
+        name: requests_per_second
+      target:
+        type: AverageValue
+        averageValue: 100
+```
+### 23.  What is usage Aws waf?
+* AWS WAF (Web Application Firewall) is a security service designed to protect web applications from common web exploits and vulnerabilities that could affect application availability, compromise security, or consume excessive resources. 
+* It provides users with control over which traffic to allow or block to their web applications by defining customizable web security rules.
+### Protection Against Common Web Attacks:
+* AWS WAF helps protect applications from common web attacks such as SQL injection and cross-site scripting (XSS). 
+* By defining specific rules, you can block malicious requests before they reach your application.
+### Rate Limiting:
+* You can set rules to limit the number of requests from a specific IP address over a defined time period. 
+* This helps mitigate Denial of Service (DoS) attacks and abusive behaviors by throttling the number of requests made by a user.
+### IP Whitelisting and Blacklisting:
+* AWS WAF allows you to create rules to allow or block traffic based on IP addresses. 
+* For example, you can whitelist trusted IPs to ensure only specific users can access your application or block known malicious IP addresses.
+### Customizable Rules:
+* AWS WAF lets you create custom rules tailored to your application's needs. 
+* You can inspect HTTP requests for specific patterns or criteria, such as headers, URI strings, query string parameters, or request body content.
+### Integration with AWS Services:
+* AWS WAF is integrated with other AWS services like Amazon CloudFront, Application Load Balancer (ALB), and API Gateway. 
+* This integration provides a layered security approach and allows you to enforce WAF rules at the edge or at the application layer.
+### Monitoring and Logging:
+* AWS WAF offers detailed logging of all requests processed by the WAF.
+*  You can monitor these logs in real-time, analyze traffic patterns, and gain insights into potential threats.
+### Geo-Blocking:
+* AWS WAF allows you to create rules to block or allow requests based on the geographic location of the incoming requests. 
+* This can help prevent attacks originating from specific countries or regions.
+
+* AWS WAF follows a `pay-as-you-go` pricing model. You pay for the number of web ACLs, rules, and requests processed, allowing you to scale your usage based on the needs of your application.
+### 24.  Why you are using aws waf we have a security group for blocking ip address?
+### AWS Security Groups:
+* Operate at the network layer (Layer 4).
+* Control inbound and outbound traffic to/from EC2 instances or other AWS resources based on IP addresses, ports, and protocols.
+* Good for allowing or denying access from certain IP ranges but does not provide protection against application-layer threats.
+### AWS WAF:
+* Operates at the application layer (Layer 7).
+* Provides protection against specific web-based threats, such as SQL injection, cross-site scripting (XSS), and bad bots.
+* Allows more granular control based on HTTP request attributes (e.g., headers, body, URIs), which is not possible with Security Groups.
+### 25.  How to configure eks cluster in cloud watch?
+* Configuring Amazon EKS (Elastic Kubernetes Service) to send logs and metrics to Amazon CloudWatch involves several steps, including creating an EKS cluster, configuring the necessary IAM roles, and deploying the CloudWatch agent.
+### 1. Create an EKS Cluster:
+### 2. Configure IAM Roles for CloudWatch:
+* You will need an IAM role that the EKS cluster and nodes can assume to publish logs to CloudWatch.
+    #### Create an IAM Role for the EKS Cluster:
+    ----------------------------------------------
+```yaml
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "eks.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+```
+   #### Attach CloudWatch Policy to the Role:
+   * Attach the following AWS managed policy to the role: AmazonEKSClusterPolicy.
+   ### Create an IAM Role for Node Groups:
+   * Create another IAM role for your node group with a similar trust relationship but allowing EC2 instances to assume the role:
+```yaml
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+
+```
+   * Attach the following policies to the node role:
+       * AmazonEKSWorkerNodePolicy
+       * AmazonEC2ContainerRegistryReadOnly
+       * CloudWatchAgentServerPolicy
+### 3. Deploy the CloudWatch Agent
+* You can use a Kubernetes manifest to deploy the CloudWatch agent, which collects logs and metrics from the EKS cluster and sends them to CloudWatch.
+#### Create a ConfigMap for the CloudWatch Agent
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cwagentconfig
+  namespace: kube-system
+data:
+  cwagentconfig.json: | 
+    {
+      "logs": {
+        "logs_collected": {
+          "files": {
+            "collect_list": [
+              {
+                "file_path": "/var/log/containers/*.log",
+                "file_type": "log",
+                "multiline_start_pattern": "{timestamp_format}"
+              }
+            ]
+          }
+        }
+      }
+    }
+
+```
+#### Deploy the CloudWatch Agent DaemonSet:
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: cwagent
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      name: cwagent
+  template:
+    metadata:
+      labels:
+        name: cwagent
+    spec:
+      containers:
+      - name: cwagent
+        image: amazon/cloudwatch-agent:latest
+        env:
+        - name: CWAGENT_CONFIG
+          value: "cwagentconfig"
+        volumeMounts:
+        - name: cwagentconfig
+          mountPath: /etc/cwagentconfig
+        - name: varlog
+          mountPath: /var/log/containers
+      volumes:
+      - name: cwagentconfig
+        configMap:
+          name: cwagentconfig
+      - name: varlog
+        hostPath:
+          path: /var/log/containers
+
+```
+### Apply the DaemonSet:
+```
+kubectl apply -f cwagent-daemonset.yaml
+```
+### 4. Verify the Setup
+* After deploying the CloudWatch agent, you can check the CloudWatch console to verify that logs and metrics are being collected.
+```
+kubectl get daemonset -n kube-system
+```
+### 5.Monitoring and Logging
+* You can now monitor your EKS cluster logs and metrics in the CloudWatch Logs and CloudWatch Metrics sections of the AWS Management Console.
+* You can also create CloudWatch Alarms based on the metrics collected from your EKS cluster.
+
+### 26.  What is purpose of Prometheus and grafana?
+* prometheus will collect the metrics of the server and graphan will visualize the metrics in defualt/custom dashboards.  
+### 27.  Why grafana needed already we have a premotheus?
+* visualization.
+### 28. What is the SCM you used in your project?
+* Git
+### 29. what are the types of vpc endpoints?
+* 
