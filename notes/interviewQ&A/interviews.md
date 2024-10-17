@@ -898,85 +898,84 @@ spec:
 
 ## nowcom
 --------------
-1. tell me day to day activities.
-2. what are the issues faced in project and how to communicate with developers. regarding issues
-3. what type of branching strategie you can follow
-4. tell me ci process and cd process
-5. how to.connect eks cluster
-6. how to maintain secrets in your project
-7. what version you used in eks cluster.
-8. what container runtime used in eks version 1.26 (docker or containerd)
-9. how to login master node in eks cluster?
-10. how to maintain security in pod level
-11. how to communicate one pod to another pod
-12. what are the issues faced to deploy application into eks cluster
-13. how nodes and pods in your cluster?
-14. what type of instance type used in cluster nodes
-15. tell me about route53 records
-16. i defined /28 cidr block is it possible to create vpc
-17. how many ip address block in subnet ipadderess which purpose aws block that ip address
-18. what are the services used in aws services.
-19. difference between deployment and deamonset.
-20. i created two same vpc cidr block in same region is it possible to communicate each other?
-21. where you are stored secrets.
-22. what are the tools used in monitoring in your project
-23. how to integrate jenkins to eks
-24.how to create empty image or image without os or alphine in docker?
-is container inside container possible?
-25.how instances in private subnet can communicate with other aws services?
+### 1. tell me day to day activities.
+### 2. what are the issues faced in project and how to communicate with developers. regarding issues
+### 3. what type of branching strategie you can follow
+### 4. tell me ci process and cd process
+### 5. how to.connect eks cluster
+### 6. how to maintain secrets in your project
+### 7. what version you used in eks cluster.
+### 8. what container runtime used in eks version 1.26 (docker or containerd)
+### 9. how to login master node in eks cluster?
+### 10. how to maintain security in pod level
+### 11. how to communicate one pod to another pod
+### 12. what are the issues faced to deploy application into eks cluster
+### 13. how nodes and pods in your cluster?
+### 14. what type of instance type used in cluster nodes
+### 15. tell me about route53 records
+### 16. i defined /28 cidr block is it possible to create vpc
+### 17. how many ip address block in subnet ipadderess which purpose aws block that ip address
+### 18. what are the services used in aws services.
+### 19. difference between deployment and deamonset.
+### 20. i created two same vpc cidr block in same region is it possible to communicate each other?
+### 21. where you are stored secrets.
+### 22. what are the tools used in monitoring in your project
+### 23. how to integrate jenkins to eks
+### 24.how to create empty image or image without os or alphine in docker?is container inside container possible?
+### 25.how instances in private subnet can communicate with other aws services?
 
 ## Firstsource(ets):
 ------------------------------------------------------------
-How to establish communication between containers and pods?
-How to create ec2 instance without ami id using terraform?
-How network works in container communication?
-How to maintain resources using terraform?
-Change type of instance in node group of eks cluster using terraform?
-How to establish connection betweek s3 bucket and instance in private subnets?
-What are the functions used in aws lambda for deployment?
+### How to establish communication between containers and pods?
+### How to create ec2 instance without ami id using terraform?
+### How network works in container communication?
+### How to maintain resources using terraform?
+### Change type of instance in node group of eks cluster using terraform?
+### How to establish connection betweek s3 bucket and instance in private subnets?
+### What are the functions used in aws lambda for deployment?
 
 ### hexaware
 ------------------------------------------------------------------
-1. diffrence between static inventory and dynamic inventroy 
-2. how you create users in multple envinoements using ansible
-3. how you maintain artifactroy in jenkins
-4. what will happens in during build 
-5. how you do CI/CD in multple environments
-6. how can we do CI/CD for specific branch in jenkins
-7. some of the new questions I faced so far
-how does nexus or artifactory storage work in automation
-bucket policies types what you have implemented inn real time in s3 bucker
-lambda functions you used in aws lambda for small scale deployments
-difference between security group and nacl
-probe actions in k8
-shell script to read a json response and print one response with id 9 in that response
-git hub actions?
+### 1. diffrence between static inventory and dynamic inventroy 
+### 2. how you create users in multple envinoements using ansible
+### 3. how you maintain artifactroy in jenkins
+### 4. what will happens in during build 
+### 5. how you do CI/CD in multple environments
+### 6. how can we do CI/CD for specific branch in jenkins
+### 7. some of the new questions I faced so far
+### how does nexus or artifactory storage work in automation
+### bucket policies types what you have implemented inn real time in s3 bucket?
+### lambda functions you used in aws lambda for small scale deployments
+### difference between security group and nacl
+### probe actions in k8
+### shell script to read a json response and print one response with id 9 in that response
+### git hub actions?
 
 ## TCS--WALKIN
 -----------
-1. Tell me about yourself and role & responsibilities in your project
-2. what is difference between git rebase and git merge?
-3. what is git stash?
-4. how to integrate git with Jenkins?
-5. which pipeline used in your project?
-6. do you known pipeline write it?
-7. how to see your pods in kuberbernetes?
-8. i have a scenario i want to see which pod is located which node how to identify?
-9. i want to deploy application in k8 what are steps to follow to deploy application?
-10. what are services used in your project?
-11. why you are using Loadbalancer we hava nodeport also? 
-12. i have a scenario i want to deploy application using Jenkins what are steps to follow?
-13. how to integrate SonarQube with Jenkins?
-14. what is public subenet and private subnet?
-15. how to provide internet access to private subnet?
-16. what is Elb?
-17. what are Loadbalancers used in your project?
-18. why you are used application Loadbalancer why not using network Loadbalacer?
-19. what is the purpose of Route53?
-20. what is webhook?
-21. how to integrate Kubernetes with Jenkins tell me the process?
-22. do you have terraform knowledge?
-23. what is tf statefile in terraform?
+### 1. Tell me about yourself and role & responsibilities in your project
+### 2. what is difference between git rebase and git merge?
+### 3. what is git stash?
+### 4. how to integrate git with Jenkins?
+### 5. which pipeline used in your project?
+### 6. do you known pipeline write it?
+### 7. how to see your pods in kuberbernetes?
+### 8. i have a scenario i want to see which pod is located which node how to identify?
+### 9. i want to deploy application in k8 what are steps to follow to deploy application?
+### 10. what are services used in your project?
+### 11. why you are using Loadbalancer we hava nodeport also? 
+### 12. i have a scenario i want to deploy application using Jenkins what are steps to follow?
+### 13. how to integrate SonarQube with Jenkins?
+### 14. what is public subenet and private subnet?
+### 15. how to provide internet access to private subnet?
+### 16. what is Elb?
+### 17. what are Loadbalancers used in your project?
+### 18. why you are used application Loadbalancer why not using network Loadbalacer?
+### 19. what is the purpose of Route53?
+### 20. what is webhook?
+### 21. how to integrate Kubernetes with Jenkins tell me the process?
+### 22. do you have terraform knowledge?
+### 23. what is tf statefile in terraform?
 
 ====================================
 ## WEBCLUES INFOTECH    (GUJARAT)   DATA: 20/05/2024
